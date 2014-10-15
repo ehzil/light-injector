@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LightInjector.Annotations
 {
-    public class AutowiredAttribute
+    public class AutowiredAttribute : Attribute
     {
 
     }
