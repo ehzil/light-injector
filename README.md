@@ -8,13 +8,16 @@ easy/light injector
 [Component]
 public class Dao
 {
+    
     public .......
 
 }
 
 public class Service
 {
+    
     [Autowired]
+    
     private Dao dao;
 
 }
