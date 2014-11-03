@@ -26,7 +26,7 @@ namespace LightInjector.Mvc
             var fileds = controller.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
             foreach (var f in fileds)
             {
-                if (f.CustomAttributes.Any(ca => ca.AttributeType == typeof(AutowiredAttribute)))
+                if (f.CustomAttributes.Any(ca => ca.AttributeType == typeof(ReferAttribute)))
                 {
                     f.SetValue(controller, ObjectFactory.GetObject(f.FieldType));
                 }

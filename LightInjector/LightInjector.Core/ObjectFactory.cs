@@ -32,6 +32,11 @@ namespace LightInjector.Core
             return ObjectContainer.Objects[name];
         }
 
+        public static T GetObject<T>()
+        {
+            return (T)GetObject(typeof(T));
+        }
+
         /// <summary>
         /// 填充容器
         /// </summary>
@@ -39,7 +44,7 @@ namespace LightInjector.Core
         /// <param name="type"></param>
         private static void FillContainer(Dictionary<string, object> objects, Type type)
         {
-            if (!type.GetCustomAttributes().Any(c => c.GetType() == typeof(ComponentAttribute)))
+            if (!type.GetCustomAttributes().Any(c => c.GetType() == typeof(ManagedAttribute)))
             {
                 throw new NotSupportedTypeException("Not Supported Type:" + type.FullName + ". Only [ComponentAttribute] marked class is supported.");
             }
@@ -50,7 +55,7 @@ namespace LightInjector.Core
 
             foreach (var f in fields)
             {
-                if (f.CustomAttributes.Any(ca => ca.AttributeType == typeof(AutowiredAttribute)))
+                if (f.CustomAttributes.Any(ca => ca.AttributeType == typeof(ReferAttribute)))
                 {
                     if (objects.ContainsKey(f.FieldType.FullName))
                     {
